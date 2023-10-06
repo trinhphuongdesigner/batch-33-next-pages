@@ -80,43 +80,24 @@ export default ProductDetail;
 //   }
 // }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [],
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps(req) {
-  try {
-    const { params } = req;
-    const response = await axiosClient.get(`/user/products/${params.id}`);
-
-    return {
-      props: {
-        product: response.data.payload,
-      },
-
-      revalidate: 60 * 60 * 24 * 30,
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
-}
-
-// SSR
-// export async function getServerSideProps(req) {
+// export async function getStaticProps(req) {
 //   try {
-//     console.log('««««« req »»»»»', req);
 //     const { params } = req;
-//     const response = await axiosClient.get(`/products/${params.id}`);
+//     const response = await axiosClient.get(`/user/products/${params.id}`);
 
 //     return {
 //       props: {
 //         product: response.data.payload,
 //       },
+
+//       revalidate: 60 * 60 * 24 * 30,
 //     };
 //   } catch (error) {
 //     return {
@@ -124,3 +105,22 @@ export async function getStaticProps(req) {
 //     };
 //   }
 // }
+
+// SSR
+export async function getServerSideProps(req) {
+  try {
+    console.log('««««« req »»»»»', req);
+    const { params } = req;
+    const response = await axiosClient.get(`/products/${params.id}`);
+
+    return {
+      props: {
+        product: response.data.payload,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}

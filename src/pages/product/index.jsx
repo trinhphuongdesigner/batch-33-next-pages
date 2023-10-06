@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import axiosClient from '@/libraries/axiosClient';
 
-function Products({ products }) {
+function Products(props) {
+  const { products } = props;
   return (
     <>
       <Head>
@@ -13,49 +14,13 @@ function Products({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="d-flex justify-content-center align-items-center">
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          Launch demo modal
-        </button>
-
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">...</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {products.length > 0 ? (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {products.map((p) => (
             <Link
               style={{ height: '80px' }}
               key={p._id}
-              href={`/products/${p._id}`}
+              href={`/product/${p._id}`}
             >
               <h1>{p.name}</h1>
             </Link>
@@ -73,7 +38,7 @@ export default Products;
 // getServerSideProps - Server-Side Rendering
 export async function getServerSideProps() {
   try {
-    const response = await axiosClient.get('/user/products');
+    const response = await axiosClient.get('/products');
 
     return {
       props: {

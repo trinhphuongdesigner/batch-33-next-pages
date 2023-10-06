@@ -9,7 +9,7 @@ function Products(props) {
 
   const getProducts = useCallback(async () => {
     try {
-      const res = await axiosClient.get('/products');
+      const res = await axiosClient.get('/products/all');
       setProducts(res.data.payload);
     } catch (error) {
       console.log(error);
