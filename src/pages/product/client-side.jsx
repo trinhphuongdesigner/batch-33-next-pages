@@ -16,9 +16,11 @@ function Products(props) {
     }
   }, []);
 
+  console.log('««««« products »»»»»', products);
+
   useEffect(() => {
     getProducts()
-  }, [getProducts]);
+  }, []);
 
   return (
     <>
