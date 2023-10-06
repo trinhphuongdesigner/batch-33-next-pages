@@ -1,9 +1,9 @@
-import React from "react";
-import Head from "next/head";
-import PropTypes from "prop-types";
+import React from 'react';
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 import axiosClient from '@/libraries/axiosClient';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 function ProductDetail(props) {
   const { product } = props;
@@ -80,34 +80,21 @@ export default ProductDetail;
 //   }
 // }
 
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   };
-// }
+export async function getStaticPaths() {
+  const response = await axiosClient.get(`/products/all`);
 
-// export async function getStaticProps(req) {
-//   try {
-//     const { params } = req;
-//     const response = await axiosClient.get(`/user/products/${params.id}`);
+  return {
+    // paths: [],
+    paths: response.data.payload.map((item) => ({
+      params: {
+        id: item._id,
+      },
+    })),
+    fallback: false,
+  };
+}
 
-//     return {
-//       props: {
-//         product: response.data.payload,
-//       },
-
-//       revalidate: 60 * 60 * 24 * 30,
-//     };
-//   } catch (error) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-// }
-
-// SSR
-export async function getServerSideProps(req) {
+export async function getStaticProps(req) {
   try {
     console.log('««««« req »»»»»', req);
     const { params } = req;
@@ -117,6 +104,8 @@ export async function getServerSideProps(req) {
       props: {
         product: response.data.payload,
       },
+
+      // revalidate: 60 * 60 * 24 * 30,
     };
   } catch (error) {
     return {

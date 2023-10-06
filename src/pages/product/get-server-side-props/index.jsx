@@ -20,7 +20,7 @@ function Products(props) {
             <Link
               style={{ height: '80px' }}
               key={p._id}
-              href={`/product/${p._id}`}
+              href={`/product/get-server-side-props/${p._id}`}
             >
               <h1>{p.name}</h1>
             </Link>
@@ -52,30 +52,4 @@ export async function getServerSideProps() {
       notFound: true,
     };
   }
-}
-
-// getStaticProps - Static-Side Generation
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   };
-// }
-
-// export async function getStaticProps(req) {
-//   try {
-//     const response = await axiosClient.get('/user/products');
-
-//     return {
-//       props: {
-//         products: response.data.payload,
-//       },
-
-//       // revalidate: 10,
-//     };
-//   } catch (error) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-// }
+};
