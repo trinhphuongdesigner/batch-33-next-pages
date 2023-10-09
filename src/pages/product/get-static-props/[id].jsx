@@ -98,7 +98,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(req) {
   try {
-    console.log('««««« req »»»»»', req);
     const { params } = req;
     const response = await axiosClient.get(`/products/${params.id}`);
 
@@ -107,8 +106,8 @@ export async function getStaticProps(req) {
         product: response.data.payload,
       },
 
-      revalidate: 10,
-      // revalidate: 60 * 60 * 24 * 30,
+      // revalidate: 10,
+      revalidate: 60 * 60 * 24 * 30,
     };
   } catch (error) {
     return {

@@ -6,6 +6,7 @@ const nextConfig = {
       "pinterest.com",
       "images.unsplash.com",
       "thuthuatphanmem.vn",
+      "i.postimg.cc",
     ],
   },
 }

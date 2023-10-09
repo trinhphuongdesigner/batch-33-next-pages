@@ -18,7 +18,7 @@ function Products(props) {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {products.map((p) => (
             <Link
-              style={{ height: '80px' }}
+              style={{ height: '800px' }}
               key={p._id}
               href={`/product/get-server-side-props/${p._id}`}
             >
@@ -36,7 +36,25 @@ function Products(props) {
 export default Products;
 
 // getServerSideProps - Server-Side Rendering
-export async function getServerSideProps() {
+// export async function getServerSideProps() {
+//   try {
+//     const response = await axiosClient.get('/products/all');
+
+//     return {
+//       props: {
+//         products: response.data.payload,
+//       },
+
+//       // revalidate: 24 * 60 * 60,
+//     };
+//   } catch (error) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+// };
+
+export async function getStaticProps(req) {
   try {
     const response = await axiosClient.get('/products');
 
@@ -45,11 +63,11 @@ export async function getServerSideProps() {
         products: response.data.payload,
       },
 
-      // revalidate: 24 * 60 * 60,
+      // revalidate: 10,
     };
   } catch (error) {
     return {
       notFound: true,
     };
   }
-};
+}

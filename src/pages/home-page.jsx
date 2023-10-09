@@ -154,6 +154,8 @@ function HomePage2(props) {
               <Image
                 src="https://i.postimg.cc/76X9ZV8m/Screenshot_from_2022-06-03_18-45-12.png"
                 alt="Image"
+                width={100}
+                height={100}
               />
               <div className="best-p1-txt">
                 <div className="name-of-p">
@@ -312,6 +314,8 @@ function HomePage2(props) {
               <Image
                 src="https://i.postimg.cc/Dfj5VBcz/sunglasses1.jpg"
                 alt="Image"
+                width={100}
+                height={100}
               />
               <div className="best-p1-txt">
                 <div className="name-of-p">
@@ -635,6 +639,8 @@ function HomePage2(props) {
             <Image
               src="https://i.postimg.cc/htGyQ4JB/footer-logo.png"
               alt="logo"
+              width={100}
+              height={100}
             />
             <p>
               The customer is at the heart of our

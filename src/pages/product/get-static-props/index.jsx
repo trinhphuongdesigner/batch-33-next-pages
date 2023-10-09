@@ -18,7 +18,7 @@ function Products(props) {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {products.map((p) => (
             <Link
-              style={{ height: '80px' }}
+              style={{ height: '800px' }}
               key={p._id}
               href={`/product/get-static-props/${p._id}`}
             >
