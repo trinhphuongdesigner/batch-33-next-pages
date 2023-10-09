@@ -35,14 +35,6 @@ function Products(props) {
 
 export default Products;
 
-// getStaticProps - Static-Side Generation
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   };
-// }
-
 export async function getStaticProps(req) {
   try {
     const response = await axiosClient.get('/products');

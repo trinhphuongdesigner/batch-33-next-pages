@@ -81,16 +81,18 @@ export default ProductDetail;
 // }
 
 export async function getStaticPaths() {
-  const response = await axiosClient.get(`/products/all`);
+  // const response = await axiosClient.get(`/products/all`);
 
   return {
-    // paths: [],
-    paths: response.data.payload.map((item) => ({
-      params: {
-        id: item._id,
-      },
-    })),
-    fallback: false,
+    paths: [], // trong trường hợp nhiều data
+    // paths: response.data.payload.map((item) => ({ // Trong trường hợp ít data
+    //   params: {
+    //     id: item._id,
+    //   },
+    // })),
+    // fallback: false, // dự liệu không biến động (không thêm mới, không chỉnh sửa)
+    // fallback: blocking, || dữ liệu có tính biến động, nhiều dữ liệu - không trả về phiên bản draff
+    fallback: true, // dữ liệu có tính biến động, nhiều dữ liệu - có trả về phiên bản draff
   };
 }
 
@@ -105,6 +107,7 @@ export async function getStaticProps(req) {
         product: response.data.payload,
       },
 
+      revalidate: 10,
       // revalidate: 60 * 60 * 24 * 30,
     };
   } catch (error) {
